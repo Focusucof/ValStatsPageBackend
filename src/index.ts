@@ -12,7 +12,7 @@ async function main() {
     const userDetails: userDetails = await login();
     console.log(userDetails);
 
-    const requestBase: AxiosInstance = axios.create({
+    const pdRequest: AxiosInstance = axios.create({
         baseURL: 'https://pd.na.a.pvp.net/',
         method: 'GET',
         headers: {
@@ -22,7 +22,7 @@ async function main() {
         }
     });
 
-    let matchHistory = await getMatchHistory(userDetails.puuid, userDetails.access_token, userDetails.entitlements);
+    let matchHistory = await getMatchHistory(userDetails.puuid, pdRequest);
     console.log(matchHistory);
 }
 
