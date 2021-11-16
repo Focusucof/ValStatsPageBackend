@@ -4,13 +4,9 @@ import getMatchHistory from './matchHistory';
 import { userDetails } from './globals';
 import { match } from 'assert';
 
-async function main() {
+async function main() {    
     //@ts-ignore
-
-    
-
     const userDetails: userDetails = await login();
-    console.log(userDetails);
 
     const pdRequest: AxiosInstance = axios.create({
         baseURL: 'https://pd.na.a.pvp.net/',
