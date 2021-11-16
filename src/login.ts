@@ -45,7 +45,7 @@ export default async function login(username: string, password: string) {
             };
 
             await axios.post('https://entitlements.auth.riotgames.com/api/token/v1', {}, {jar: cookieJar, withCredentials: true, headers}).then(async (response: any) => {
-                userDetails.entitlements = response.data;
+                userDetails.entitlements = response.data.entitlements_token;
 
                 await axios.post('https://auth.riotgames.com/userinfo', {}, {jar: cookieJar, withCredentials: true, headers}).then(async (response: any) => {
                     userDetails.puuid = response.data.sub;
