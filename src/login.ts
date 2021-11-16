@@ -1,11 +1,12 @@
+import { userDetails } from "./globals";
+
 const axios = require('axios').default;
 const axiosCookieJarSupport = require('axios-cookiejar-support').default;
 const tough = require('tough-cookie');
-const fs = require('fs');
 
 export default async function login(username: string, password: string) {
 
-    var userDetails = {
+    var userDetails: userDetails = {
         access_token: "",
         entitlements: "",
         puuid: ""

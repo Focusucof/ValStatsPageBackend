@@ -1,12 +1,10 @@
 import axios from 'axios';
 import login from './login';
-import { config } from 'dotenv';
-
-config();
+import { userDetails } from './globals';
 
 async function main() {
     //@ts-ignore
-    const userDetails = await login();
+    const userDetails: userDetails = await login();
     console.log(userDetails);
 }
 
