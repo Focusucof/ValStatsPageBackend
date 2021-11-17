@@ -2,11 +2,13 @@ import axios, { AxiosInstance } from 'axios';
 import login from './login';
 import getMatchHistory from './matchHistory';
 import { userDetails } from './globals';
-import { match } from 'assert';
+import { config } from 'dotenv';
+
+config();
 
 async function main() {    
     //@ts-ignore
-    const userDetails: userDetails = await login();
+    const userDetails: userDetails = await login(process.env.USERNAME, process.env.PASSWORD);
 
     const pdRequest: AxiosInstance = axios.create({
         baseURL: 'https://pd.na.a.pvp.net/',

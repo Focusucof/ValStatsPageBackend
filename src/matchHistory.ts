@@ -14,17 +14,35 @@ export default async function getMatchHistory(puuid: string, pdRequest: AxiosIns
     
     for(let i = 0; i < matchIDs.length; i++) {
         await pdRequest.get(`match-details/v1/matches/${matchIDs[i]}`).then(response => {
-            for(let j = 0; j < response.data[i].length; i++) {
-                if(response.data[i].players[j].subject == puuid) {
-                    matchDetails.push(response.data[i].players[j])
-                    console.log(response.data[i].players[j]);
+            for(let j = 0; j < response.data.players.length; j++) {
+                if(response.data.players[j].subject == puuid) {
+                    var gameinfo;
+                    if(response.data.players[j].teamId == 'Blue') {
+                        gameinfo = {
+                            teamScore: response.data.teams[1].roundsWon,
+                            enemyScore: response.data.teams[0].roundsWon,
+                            kills: response.data.players[j].stats.kills,
+                            deaths: response.data.players[j].stats.deaths,
+                            assists: response.data.players[j].stats.assists,
+                            score: response.data.players[j].stats.score,
+                        };
+                    } else {
+                        gameinfo = {
+                            teamScore: response.data.teams[0].roundsWon,
+                            enemyScore: response.data.teams[1].roundsWon,
+                            kills: response.data.players[j].stats.kills,
+                            deaths: response.data.players[j].stats.deaths,
+                            assists: response.data.players[j].stats.assists,
+                            score: response.data.players[j].stats.score,
+                        };
+                    }
+                    matchDetails.push(gameinfo);
                 }
             }
-            matchDetails.push(response.data);
         });
     }
     
-    console.log(JSON.stringify(matchDetails))
+    //console.log(JSON.stringify(matchDetails))
 
-    return matchIDs;
+    return matchDetails;
 }
