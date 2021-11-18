@@ -65,7 +65,7 @@ app.get('/rank-info', async function(req, res) {
 });
 
 app.listen(1337, () => {
-    console.log('listening on port 3000');
+    console.log('listening on port 8080');
 });
 
 async function main() {   
