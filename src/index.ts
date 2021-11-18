@@ -4,7 +4,6 @@ import getMatchHistory from './matchHistory';
 import getRank from './rankInfo';
 import getLeaderboardPlace from './getLeaderboardPlace';
 import { userDetails } from './globals';
-import * as dotenv from 'dotenv';
 import express, { response } from 'express';
 import cors from 'cors';
 
@@ -12,11 +11,9 @@ const app = express();
 app.use(cors());
 var userDetails: userDetails;
 
-dotenv.config();
-
 app.get('/', async function (req, res) {
     //@ts-ignore
-    userDetails = await login(process.env.USERNAME, process.env.PASSWORD);
+    userDetails = await login(process.env.USER, process.env.PASSWORD);
     res.sendStatus(200);
 });
 
