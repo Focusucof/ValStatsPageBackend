@@ -33,6 +33,10 @@ app.get('/match-history', async function(req, res) {
 });
 
 app.get('/rank-info', async function(req, res) {
+    var clientVersion: any;
+    await axios.get('https://valorant-api.com/v1/version').then(response => {
+        clientVersion = response.data.data.riotClientVersion;
+    });
     const pdRequest: AxiosInstance = axios.create({
         baseURL: 'https://pd.na.a.pvp.net/',
         method: 'GET',
@@ -40,7 +44,7 @@ app.get('/rank-info', async function(req, res) {
             'X-Riot-Entitlements-JWT': userDetails.entitlements,
             'X-Riot-ClientPlatform': 'ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9',
             'Authorization': 'Bearer ' + userDetails.access_token,
-            'X-Riot-ClientVersion': 'release-03.09-shipping-13-629826'
+            'X-Riot-ClientVersion': clientVersion
         }
     });
     
@@ -65,7 +69,7 @@ app.get('/rank-info', async function(req, res) {
 });
 
 app.listen(1337, () => {
-    console.log('listening on port 8080');
+    console.log('listening on port 1337');
 });
 
 async function main() {   
